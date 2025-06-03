@@ -15,15 +15,14 @@ def p_key_value_pair_merge(p):
 
 
 def p_error(p):
-    print("Syntax error in input!")
-    print(p)
+    print('Syntax error occured:', p)
     if not p:
-        print("End of File!")
+        print('ERROR:: End of file reached on error. You may be missing a `;` or `}`.')
         return
 
     while True:
-        tok = yacc.token() 
-        if not tok or tok.type == 'SEMICOLON': 
+        tok = yacc.token()
+        if not tok or tok.type == 'SEMICOLON':
             break
     yacc.errok()
 
@@ -66,7 +65,7 @@ def p_attribute_kv_selector(p):
     '''selector : ATTRIBUTE_KV_SELECTOR'''
     operator = '='
     attribute = p[1].split("=")[0][1:]
-    value = p[1].split("=")[1][:-1]
+    value = p[1].split("=")[1][:-1].strip('"')
     p[0] = pmss.pmssselectors.AttributeSelector(attribute, operator, value)
 
 

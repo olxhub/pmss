@@ -21,13 +21,25 @@ pmss.register_field(
     required=True
 )
 
+pmss.register_field(
+    name='session_secret',
+    type=pmss.TYPES.passwordtoken,
+    description='Unique secret key for YOUR deployment to encrypt/decrypt '\
+                'data stored in the session object.',
+    required=True
+)
+
 pmss.validate(settings)
 
 print('# settings.server_port()')
 print(settings.server_port())
 print("# settings.get('server_port')")
 print(settings.get('server_port'))
-print("# settings.get('server_port', attributes={'school': 'middlesex'}))")
-print(settings.get('server_port', attributes={'school': 'middlesex'}))
+print("# settings.get('server_port', attributes={'school': 'middlesex-high.org'}))")
+print(settings.get('server_port', attributes={'school': 'middlesex-high.org'}))
 print(settings.debug_dump())
 pmss.usage()
+
+print('----------')
+print('# settings.session_secret()')
+print(settings.session_secret())

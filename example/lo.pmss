@@ -6,8 +6,9 @@
     _biff: baz;
     hostname: foo;
     server_port: 80;
+    session_secret: 123;
 }
 
-[school=middlesex] {
+[school="middlesex-high.org"] {
     server_port: 8080;
 }

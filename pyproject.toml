@@ -7,6 +7,7 @@ name = "pmss"
 version = "0.0.3"
 authors = [
   { name="Piotr Mitros", email="piotr@mitros.org" },
+  { name="Bradley Erickson" },
 ]
 description = "Cascading Python settings"
 readme = "README.md"

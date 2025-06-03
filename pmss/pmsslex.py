@@ -35,7 +35,7 @@ t_COMPARISON = r'(=|~=|\|=|^=|\$=|\*=)'
 # * Many of these should move into the parser.
 t_CLASS_SELECTOR = r"\." + t_IDENT
 t_SIMPLE_ATTRIBUTE_SELECTOR = r"\[" + t_IDENT + "\]"
-t_ATTRIBUTE_KV_SELECTOR = r"\[" + t_IDENT + "=" + t_IDENT + "\]"
+t_ATTRIBUTE_KV_SELECTOR = r"\[" + t_IDENT + r'="([^"\\]|\\.)*"\]'
 t_UNIVERSAL_SELECTOR = r"[*]"
 t_PSEUDO_CLASS_SELECTOR = r"\:" + t_IDENT
 t_PSEUDO_ELEMENT_SELECTOR = r"\:\:" + t_IDENT
@@ -87,6 +87,7 @@ lexer = lex.lex()
 def strip_comments(text):
     '''
     Preprocessing step
+    TODO this interprets values set to urls as comments.
     '''
     text = re.sub(r_BLOCKCOMMENT, '', text, flags=re.MULTILINE)
     text = re.sub(r_LINECOMMENT, '', text)
