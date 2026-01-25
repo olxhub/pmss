@@ -3,7 +3,6 @@
 
 >>> hostname
 localhost
-
 >>> port
 8080
 
@@ -13,7 +12,6 @@ localhost
 
 >>> type
 postgres
-
 >>> host
 db_local
 
@@ -23,7 +21,6 @@ db_local
 
 >>> hostname
 api_example_com
-
 >>> port
 443
 
@@ -34,6 +31,5 @@ api_example_com
 
 >>> type
 postgres
-
 >>> host
 db_prod_example_com

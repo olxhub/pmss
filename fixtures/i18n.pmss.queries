@@ -3,10 +3,8 @@
 
 >>> direction
 LTR
-
 >>> instruction_language
 Polish
-
 >>> code_language
 Polish
 
@@ -16,10 +14,8 @@ Polish
 
 >>> direction
 RTL
-
 >>> instruction_language
 Hebrew
-
 >>> code_language
 Polish
 
@@ -30,10 +26,8 @@ Polish
 
 >>> direction
 RTL
-
 >>> instruction_language
 Hebrew
-
 >>> code_language
 Hebrew
 
@@ -43,10 +37,8 @@ Hebrew
 
 >>> direction
 RTL
-
 >>> instruction_language
 Arabic
-
 >>> code_language
 Polish
 
@@ -56,9 +48,7 @@ Polish
 
 >>> direction
 RTL
-
 >>> instruction_language
 Persian
-
 >>> code_language
 Polish
