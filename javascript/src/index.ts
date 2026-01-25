@@ -25,4 +25,4 @@ export { QueriesParserAdapter as QueriesParser, loadQueriesFile, type QueryBlock
 export { PMSSParserAdapter, loadPMSSFile } from './pmssParserAdapter.js';
 
 // Test runner
-export { PMSSTestRunner } from './testRunner.js';
+export { PMSSTestRunner, runTests } from './testRunner.js';

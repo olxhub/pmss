@@ -187,7 +187,7 @@ export class PMSSTestRunner {
   }
 }
 
-async function main() {
+export async function runTests() {
   // Find fixtures directory - try relative to script location and up
   let fixturesPath = 'fixtures';
   try {
@@ -218,7 +218,10 @@ async function main() {
   }
 }
 
-main().catch(err => {
-  console.error(err);
-  process.exit(1);
-});
+// Run tests if this is the entry point
+if (process.argv[1]?.includes('testRunner')) {
+  runTests().catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
+}
