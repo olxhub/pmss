@@ -9,7 +9,7 @@ import { join } from 'path';
 import { loadQueriesFile, QueryBlock } from './queriesParserAdapter.js';
 import { BlockTestResult, TestResult } from './types.js';
 import { Selector, css_selector_key, SelectorMatchContext } from './selectors.js';
-import { loadPMSSFile } from './pmssLoader.js';
+import { loadPMSSFile } from './pmssParserAdapter.js';
 
 export class PMSSTestRunner {
   constructor(private fixturesDir: string = 'fixtures') {}

@@ -22,7 +22,7 @@ export { type Rule, type RuleSheet, type TestResult, type BlockTestResult } from
 
 // Parsers
 export { QueriesParserAdapter as QueriesParser, loadQueriesFile, type QueryBlock } from './queriesParserAdapter.js';
-export { loadPMSSFile } from './pmssLoader.js';
+export { PMSSParserAdapter, loadPMSSFile } from './pmssParserAdapter.js';
 
 // Test runner
 export { PMSSTestRunner } from './testRunner.js';

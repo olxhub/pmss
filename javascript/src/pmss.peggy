@@ -3,23 +3,24 @@
  *
  * CSS-inspired configuration format with hierarchical selectors and properties
  *
- * Example:
- * * {
- *     hostname: localhost;
- * }
- *
- * [environment=production] {
- *     hostname: api.example.com;
- * }
+ * Semantic actions build structured output directly instead of raw parse trees
  */
 
-stylesheet = _ block* _
+stylesheet = __ blocks:block* __
+  { return blocks; }
 
-block = selector _ "{" _ declarations? _ "}"
+block = selector:selector __ "{" __ declarations:declarations? __ "}"
+  {
+    return {
+      selector: selector,
+      declarations: declarations || []
+    };
+  }
 
-selector = _ parts:(simpleSelector)+ _
+selector = __ parts:(simpleSelector)+ __
+  { return { parts: parts }; }
 
-simpleSelector = _
+simpleSelector = __
   part:(
     universalSelector
     / classSelector
@@ -27,26 +28,35 @@ simpleSelector = _
     / pseudoClassSelector
     / pseudoElementSelector
     / typeSelector
-  ) _
+  ) __
   { return part; }
 
 universalSelector = "*"
+  { return { type: 'universal' }; }
 
 classSelector = "." name:identifier
+  { return { type: 'class', name: name }; }
 
 typeSelector = !(["." "[" ":" "{" "}"]) name:identifier
+  { return { type: 'type', name: name }; }
 
 attributeSelector =
-  "[" _ name:identifier _ "]"
-  / "[" _ name:identifier _ "=" _ value:stringLiteral _ "]"
+  "[" __ name:identifier __ "]"
+    { return { type: 'attribute', name: name, operator: null, value: null }; }
+  / "[" __ name:identifier __ "=" __ value:stringLiteral __ "]"
+    { return { type: 'attribute', name: name, operator: '=', value: value }; }
 
 pseudoClassSelector = ":" name:identifier
+  { return { type: 'pseudo-class', name: name }; }
 
 pseudoElementSelector = "::" name:identifier
+  { return { type: 'pseudo-element', name: name }; }
 
-declarations = first:declaration rest:(declaration)*
+declarations = __ first:declaration rest:(__ declaration)*
+  { return [first, ...rest.map(r => r[1])]; }
 
-declaration = key:identifier _ ":" _ value:declValue _ ";"
+declaration = key:identifier __ ":" __ value:declValue __ ";"
+  { return { key: key, value: value.trim() }; }
 
 declValue = $(!";" !"\n" .)+
 
@@ -55,4 +65,12 @@ identifier = $[a-zA-Z0-9_-]+
 stringLiteral = "\"" value:$([^"\\] / "\\" .)* "\""
   { return value; }
 
+// Whitespace with comments
+__ = ([ \t\r\n] / comment)*
+
+// Single-line and block comments
+comment = "//" (!"\n" .)* "\n"
+        / "/*" (!"*/" .)* "*/"
+
+// Just whitespace (no comments)
 _ = [ \t\r\n]*
