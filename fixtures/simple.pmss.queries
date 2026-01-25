@@ -1,0 +1,39 @@
+# Development defaults
+- env: dev
+
+>>> hostname
+localhost
+
+>>> port
+8080
+
+# Database config with nesting (type selector)
+- env: dev
+- types: database
+
+>>> type
+postgres
+
+>>> host
+db_local
+
+# Production overrides (using class selector)
+- env: prod
+- classes: production
+
+>>> hostname
+api_example_com
+
+>>> port
+443
+
+# Production database config
+- env: prod
+- types: database
+- classes: production
+
+>>> type
+postgres
+
+>>> host
+db_prod_example_com
