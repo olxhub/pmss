@@ -1,6 +1,6 @@
 {
   "name": "pmss",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "Cascading JavaScript settings",
   "type": "module",
   "main": "dist/index.js",
@@ -27,6 +27,15 @@
     }
   ],
   "license": "MIT",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ETS-Next-Gen/pmss.git",
+    "directory": "javascript"
+  },
   "dependencies": {
     "zod": "^3.22.4"
   },
