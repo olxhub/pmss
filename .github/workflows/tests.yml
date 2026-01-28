@@ -24,7 +24,7 @@ jobs:
           python -m pip install -e .
 
       - name: Run Python tests
-        run: ./python/run_tests.sh
+        run: bash ./python/run_tests.sh
 
   node-tests:
     name: Node tests
@@ -46,7 +46,9 @@ jobs:
 
       - name: Build
         working-directory: javascript
-        run: npm run build
+        run: |
+          npm run generate
+          npm run build
 
       - name: Run Node tests
         working-directory: javascript
