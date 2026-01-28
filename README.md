@@ -3,8 +3,7 @@ Preference Management Style Sheets
 
 This is intended as a language for settings. The name might be a placeholder. Or final. Who knows?
 
-[![Python tests](https://github.com/ETS-Next-Gen/pmss/actions/workflows/tests.yml/badge.svg?job=Python%20tests&label=Python)](https://github.com/ETS-Next-Gen/pmss/actions/workflows/tests.yml)
-[![Node tests](https://github.com/ETS-Next-Gen/pmss/actions/workflows/tests.yml/badge.svg?job=Node%20tests&label=Node)](https://github.com/ETS-Next-Gen/pmss/actions/workflows/tests.yml)
+[![Tests](https://github.com/ETS-Next-Gen/pmss/actions/workflows/tests.yml/badge.svg)](https://github.com/ETS-Next-Gen/pmss/actions/workflows/tests.yml)
 
 ![XKCD Standards Comic](https://imgs.xkcd.com/comics/standards.png)
 
