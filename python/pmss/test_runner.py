@@ -175,16 +175,38 @@ class PMSSTestRunner:
         - types: ['course']
         """
         match_context = {}
+        attributes = {}
+
+        def _parse_attribute_entry(entry: str):
+            if not isinstance(entry, str):
+                return
+            entries = [segment.strip() for segment in entry.split(",") if segment.strip()]
+            for segment in entries:
+                if "=" in segment:
+                    key, value = segment.split("=", 1)
+                    attributes[key.strip()] = value.strip()
+                else:
+                    attributes[segment.strip()] = None
+
         for key, value in context.items():
-            if key in ('classes', 'types'):
+            if key == "id":
+                match_context[key] = value[0] if isinstance(value, list) and value else value
+            elif key in ('classes', 'types'):
                 # Ensure it's a list
                 if isinstance(value, list):
                     match_context[key] = value
                 else:
                     match_context[key] = [value] if value else []
+            elif key == "attributes":
+                values = value if isinstance(value, list) else [value]
+                for entry in values:
+                    _parse_attribute_entry(entry)
             else:
                 # Keep other values as-is (for attributes dict)
                 match_context[key] = value
+
+        if attributes:
+            match_context['attributes'] = attributes
 
         return match_context
 
@@ -209,7 +231,7 @@ class PMSSTestRunner:
                             id=context.get("id"),
                             types=context.get("types", []),
                             classes=context.get("classes", []),
-                            attributes=context,
+                            attributes=context.get("attributes", {}),
                         ):
                             matches.append([selector, value])
                     except Exception:

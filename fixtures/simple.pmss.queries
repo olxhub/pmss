@@ -6,6 +6,15 @@ localhost
 >>> port
 8080
 
+# Server config using multiple attributes
+- env: dev
+- types: server
+- attributes: domain=middleton-high.org
+- attributes: tier=public
+
+>>> hostname
+public_middleton_high_org
+
 # Database config with nesting (type selector)
 - env: dev
 - types: database
@@ -33,3 +42,11 @@ api_example_com
 postgres
 >>> host
 db_prod_example_com
+
+# Server config using attribute selector
+- env: dev
+- types: server
+- attributes: domain=middleton-high.org
+
+>>> port
+8080

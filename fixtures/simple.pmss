@@ -18,3 +18,11 @@ database {
 database .production {
     host: db_prod_example_com;
 }
+
+server [domain="middleton-high.org"] {
+    port: 8080;
+}
+
+server [domain="middleton-high.org"][tier="public"] {
+    hostname: public_middleton_high_org;
+}

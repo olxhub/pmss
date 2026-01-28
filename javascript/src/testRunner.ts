@@ -140,6 +140,19 @@ export class PMSSTestRunner {
 
   private convertContextForMatching(context: Record<string, string | string[]>): SelectorMatchContext {
     const matchContext: SelectorMatchContext = {};
+    const attributes: Record<string, string> = {};
+
+    const parseAttributeEntry = (entry: string) => {
+      const segments = entry.split(',').map(segment => segment.trim()).filter(Boolean);
+      for (const segment of segments) {
+        if (segment.includes('=')) {
+          const [key, value] = segment.split('=', 2);
+          attributes[key.trim()] = value.trim();
+        } else {
+          attributes[segment.trim()] = '';
+        }
+      }
+    };
 
     for (const [key, value] of Object.entries(context)) {
       if (key === 'id') {
@@ -149,10 +162,15 @@ export class PMSSTestRunner {
       } else if (key === 'types') {
         matchContext.types = Array.isArray(value) ? value : (value ? [value as string] : []);
       } else if (key === 'attributes') {
-        if (typeof value === 'object' && !Array.isArray(value)) {
-          matchContext.attributes = value;
+        const values = Array.isArray(value) ? value : [value];
+        for (const entry of values) {
+          parseAttributeEntry(entry);
         }
       }
+    }
+
+    if (Object.keys(attributes).length > 0) {
+      matchContext.attributes = attributes;
     }
 
     return matchContext;
