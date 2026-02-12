@@ -3,6 +3,8 @@ Preference Management Style Sheets
 
 This is intended as a language for settings. The name might be a placeholder. Or final. Who knows?
 
+[![Tests](https://github.com/ETS-Next-Gen/pmss/actions/workflows/tests.yml/badge.svg)](https://github.com/ETS-Next-Gen/pmss/actions/workflows/tests.yml)
+
 ![XKCD Standards Comic](https://imgs.xkcd.com/comics/standards.png)
 
 Why? WHY???
@@ -211,6 +213,64 @@ Files
 * pmsstypes.py handles type validation and conversion. We use other
   libraries where possible, to maintain compatible formats. Conversely,
   this is usable without the rest of the system.
+
+Implementations
+---------------
+
+### Python
+
+The original Python implementation in `python/pmss/` is in the pilot stage, has gaps, but it is sufficiently mature we have used it in production to provide comprehensive type validation and configuration management.
+
+### JavaScript/TypeScript (Prototype)
+
+A prototype JavaScript/TypeScript implementation is available in `javascript/`. This uses Peggy for parsing and provides full ES module support.
+
+**Setup**
+
+```bash
+cd javascript
+npm install
+npm run build
+npm test
+```
+
+**Development**
+
+```bash
+# Build TypeScript
+npm run build
+
+# Run tests
+npm test
+
+# Watch mode
+npm run test:watch
+
+# Generate parsers from grammar
+npm run generate
+```
+
+**Debugging**
+
+A utility script for parsing and inspecting PMSS files:
+
+```bash
+node --loader ts-node/esm src/scripts/parse-pmss.ts <file>
+```
+
+**Cross-Validation**
+
+Both Python and TypeScript implementations run the same test fixtures to ensure compatibility:
+- `fixtures/simple.pmss` + `.queries`
+- `fixtures/deadlines.pmss` + `.queries`
+- `fixtures/i18n.pmss` + `.queries`
+
+**Dependencies**
+
+- **peggy** - PEG parser generator for JavaScript
+- **zod** - Runtime type validation (prepared for future type system)
+- **typescript** - Language and build toolchain
+- **@types/node** - Node.js type definitions
 
 
 Who else has thought about this?

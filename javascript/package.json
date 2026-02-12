@@ -1,0 +1,48 @@
+{
+  "name": "pmss",
+  "version": "0.0.1",
+  "description": "Cascading JavaScript settings",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "generate": "peggy --format es --allowed-start-rules stylesheet -o src/pmssParser.ts src/pmss.peggy && peggy --format es --allowed-start-rules file -o src/queriesParser.ts src/queries.peggy && node -e \"const fs=require('fs');['src/pmssParser.ts','src/queriesParser.ts'].forEach(f=>{const c=fs.readFileSync(f,'utf8');if(!c.startsWith('// @ts-nocheck'))fs.writeFileSync(f,'// @ts-nocheck\\n'+c)})\"",
+    "test": "node --loader ts-node/esm dist/testRunner.js",
+    "test:watch": "nodemon --exec 'npm run build && npm test'"
+  },
+  "keywords": [
+    "configuration",
+    "cascading",
+    "css",
+    "settings"
+  ],
+  "authors": [
+    {
+      "name": "Piotr Mitros",
+      "email": "piotr@mitros.org"
+    },
+    {
+      "name": "Bradley Erickson"
+    }
+  ],
+  "license": "MIT",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ETS-Next-Gen/pmss.git",
+    "directory": "javascript"
+  },
+  "dependencies": {
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "peggy": "^4.0.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

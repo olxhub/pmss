@@ -1,0 +1,28 @@
+/* Internationalization settings */
+
+* {
+    direction: LTR;
+    instruction_language: Polish;
+    code_language: Polish;
+}
+
+/* RTL languages using class selectors */
+.israel {
+    direction: RTL;
+    instruction_language: Hebrew;
+}
+
+.egypt {
+    direction: RTL;
+    instruction_language: Arabic;
+}
+
+.iran {
+    direction: RTL;
+    instruction_language: Persian;
+}
+
+/* Code language overrides - Technion instructors teach coding in Hebrew */
+.technion .instructor {
+    code_language: Hebrew;
+}

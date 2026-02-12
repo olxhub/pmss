@@ -1,0 +1,28 @@
+/* Simple test case: basic values and nesting */
+
+* {
+    hostname: localhost;
+    port: 8080;
+}
+
+database {
+    type: postgres;
+    host: db_local;
+}
+
+.production {
+    hostname: api_example_com;
+    port: 443;
+}
+
+database .production {
+    host: db_prod_example_com;
+}
+
+server [domain="middleton-high.org"] {
+    port: 8080;
+}
+
+server [domain="middleton-high.org"][tier="public"] {
+    hostname: public_middleton_high_org;
+}

@@ -10,7 +10,7 @@ authors = [
   { name="Bradley Erickson" },
 ]
 description = "Cascading Python settings"
-readme = "README.md"
+readme = { text = "See the project README on GitHub for full documentation.", content-type = "text/markdown" }
 requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Python :: 3",

@@ -1,0 +1,54 @@
+# Test: Basic defaults (Poland)
+- location: Poland
+
+>>> direction
+LTR
+>>> instruction_language
+Polish
+>>> code_language
+Polish
+
+# Test: Israeli student (codes in Polish, like everyone else)
+- classes: israel
+- classes: student
+
+>>> direction
+RTL
+>>> instruction_language
+Hebrew
+>>> code_language
+Polish
+
+# Test: Israeli instructor at Technion (codes in Hebrew)
+- classes: israel
+- classes: technion
+- classes: instructor
+
+>>> direction
+RTL
+>>> instruction_language
+Hebrew
+>>> code_language
+Hebrew
+
+# Test: Egyptian student at Tsinghua
+- classes: egypt
+- classes: student
+
+>>> direction
+RTL
+>>> instruction_language
+Arabic
+>>> code_language
+Polish
+
+# Test: Iranian instructor at Tsinghua
+- classes: iran
+- classes: instructor
+
+>>> direction
+RTL
+>>> instruction_language
+Persian
+>>> code_language
+Polish

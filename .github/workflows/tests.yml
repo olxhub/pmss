@@ -1,0 +1,55 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  python-tests:
+    name: Python tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        working-directory: python
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+
+      - name: Run Python tests
+        run: bash ./python/run_tests.sh
+
+  node-tests:
+    name: Node tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: javascript/package-lock.json
+
+      - name: Install Node dependencies
+        working-directory: javascript
+        run: npm ci
+
+      - name: Build
+        working-directory: javascript
+        run: |
+          npm run generate
+          npm run build
+
+      - name: Run Node tests
+        working-directory: javascript
+        run: npm test

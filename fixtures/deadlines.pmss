@@ -1,0 +1,33 @@
+/* Homework deadline configuration with cascading overrides */
+
+* {
+    hw_deadline: Friday;
+}
+
+/* Students get different deadlines */
+.extended {
+    hw_deadline: Monday;
+}
+
+.exception {
+    hw_deadline: following_Friday;
+}
+
+/* Different classes */
+.engineering {
+    hw_deadline: Sunday;
+}
+
+.humanities {
+    hw_deadline: Wednesday;
+}
+
+/* Course-level config */
+course {
+    hw_deadline: Thursday;
+}
+
+/* Course + extended */
+course .extended {
+    hw_deadline: Monday;
+}

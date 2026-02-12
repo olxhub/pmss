@@ -1,0 +1,42 @@
+# Test: Default deadline
+- context: default
+
+>>> hw_deadline
+Friday
+
+# Test: Extended deadline for certain students
+- classes: extended
+
+>>> hw_deadline
+Monday
+
+# Test: Exception for hospitalized student
+- classes: exception
+
+>>> hw_deadline
+following_Friday
+
+# Test: Engineering students
+- classes: engineering
+
+>>> hw_deadline
+Sunday
+
+# Test: Humanities students
+- classes: humanities
+
+>>> hw_deadline
+Wednesday
+
+# Test: Course level
+- types: course
+
+>>> hw_deadline
+Thursday
+
+# Test: Course + extended (compound selector - extended wins)
+- types: course
+- classes: extended
+
+>>> hw_deadline
+Monday
