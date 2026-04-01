@@ -17,6 +17,9 @@ export {
   type SelectorMatchContext,
 } from './selectors.js';
 
+// Resolution
+export { resolve } from './resolve.js';
+
 // Types
 export { type Rule, type RuleSheet, type TestResult, type BlockTestResult } from './types.js';
 

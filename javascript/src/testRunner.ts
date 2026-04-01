@@ -8,8 +8,9 @@ import { readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 import { loadQueriesFile, QueryBlock } from './queriesParserAdapter.js';
 import { BlockTestResult, TestResult } from './types.js';
-import { Selector, css_selector_key, SelectorMatchContext } from './selectors.js';
+import { Selector, SelectorMatchContext } from './selectors.js';
 import { loadPMSSFile } from './pmssParserAdapter.js';
+import { resolve } from './resolve.js';
 
 export class PMSSTestRunner {
   constructor(private fixturesDir: string = 'fixtures') {}
@@ -106,7 +107,7 @@ export class PMSSTestRunner {
 
     for (const query of block.queries) {
       try {
-        const actualValue = this.queryRules(query.key, context, rules);
+        const actualValue = resolve(rules, query.key, context);
         const expectedNormalized = (query.expected || '').trim();
         const actualNormalized = (actualValue || '').trim();
         const passed = expectedNormalized === actualNormalized;
@@ -176,33 +177,6 @@ export class PMSSTestRunner {
     return matchContext;
   }
 
-  private queryRules(
-    key: string,
-    context: SelectorMatchContext,
-    rules: Map<string, Map<Selector, string>>
-  ): string | null {
-    const selectorMap = rules.get(key);
-    if (!selectorMap) {
-      return null;
-    }
-
-    const matches: [Selector, string][] = [];
-
-    for (const [selector, value] of selectorMap.entries()) {
-      if (selector.match(context)) {
-        matches.push([selector, value]);
-      }
-    }
-
-    if (matches.length === 0) {
-      return null;
-    }
-
-    // Sort by specificity (highest first) and take the best match
-    matches.sort((a, b) => css_selector_key(a[0]) - css_selector_key(b[0]));
-
-    return matches[0][1];
-  }
 }
 
 export async function runTests() {
