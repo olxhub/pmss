@@ -13,7 +13,8 @@
  *   exit                       Exit the REPL
  */
 
-import { loadPMSSFile, css_selector_key, Selector, SelectorMatchContext } from '../index.js';
+import { css_selector_key, Selector, SelectorMatchContext } from '../index.js';
+import { loadPMSSFile } from '../node.js';
 import * as readline from 'readline';
 import path from 'path';
 

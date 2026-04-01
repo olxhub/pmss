@@ -1,10 +1,20 @@
 {
   "name": "pmss",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Cascading JavaScript settings",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./node": {
+      "types": "./dist/node.d.ts",
+      "default": "./dist/node.js"
+    }
+  },
   "scripts": {
     "build": "tsc",
     "generate": "peggy --format es --allowed-start-rules stylesheet -o src/pmssParser.ts src/pmss.peggy && peggy --format es --allowed-start-rules file -o src/queriesParser.ts src/queries.peggy && node -e \"const fs=require('fs');['src/pmssParser.ts','src/queriesParser.ts'].forEach(f=>{const c=fs.readFileSync(f,'utf8');if(!c.startsWith('// @ts-nocheck'))fs.writeFileSync(f,'// @ts-nocheck\\n'+c)})\"",

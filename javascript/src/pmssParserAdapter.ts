@@ -12,8 +12,6 @@ import {
   AttributeSelector,
   CompoundSelector,
 } from './selectors.js';
-import { promises as fs } from 'fs';
-
 interface ParsedBlock {
   selector: { parts: ParsedSelectorPart[] };
   declarations: ParsedDeclaration[];
@@ -95,9 +93,3 @@ export class PMSSParserAdapter {
   }
 }
 
-export async function loadPMSSFile(
-  filepath: string
-): Promise<Map<string, Map<Selector, string>>> {
-  const content = await fs.readFile(filepath, 'utf-8');
-  return PMSSParserAdapter.parse(content);
-}

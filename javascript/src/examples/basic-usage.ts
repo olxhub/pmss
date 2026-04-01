@@ -3,7 +3,8 @@
  * Basic usage example: Load a PMSS file and query values
  */
 
-import { loadPMSSFile, css_selector_key } from '../index.js';
+import { css_selector_key } from '../index.js';
+import { loadPMSSFile } from '../node.js';
 import path from 'path';
 
 async function main() {

@@ -4,7 +4,6 @@
  */
 
 import { parse, SyntaxError } from './queriesParser.js';
-import * as fs from 'fs';
 
 export interface Query {
   key: string;
@@ -97,7 +96,3 @@ export class QueriesParserAdapter {
   }
 }
 
-export async function loadQueriesFile(filePath: string): Promise<QueryBlock[]> {
-  const content = await fs.promises.readFile(filePath, 'utf-8');
-  return QueriesParserAdapter.parse(content);
-}

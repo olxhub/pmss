@@ -1,7 +1,10 @@
 /**
  * PMSS - Preference Management Style Sheets
  *
- * TypeScript/JavaScript implementation of cascading configuration system
+ * TypeScript/JavaScript implementation of cascading configuration system.
+ *
+ * This entry point is browser-safe (no fs dependency).
+ * For Node.js file-loading helpers, import from 'pmss/node'.
  */
 
 // Selectors
@@ -23,9 +26,6 @@ export { resolve } from './resolve.js';
 // Types
 export { type Rule, type RuleSheet, type TestResult, type BlockTestResult } from './types.js';
 
-// Parsers
-export { QueriesParserAdapter as QueriesParser, loadQueriesFile, type QueryBlock } from './queriesParserAdapter.js';
-export { PMSSParserAdapter, loadPMSSFile } from './pmssParserAdapter.js';
-
-// Test runner
-export { PMSSTestRunner, runTests } from './testRunner.js';
+// Parsers (browser-safe: parse from string, no fs)
+export { QueriesParserAdapter as QueriesParser, type QueryBlock } from './queriesParserAdapter.js';
+export { PMSSParserAdapter } from './pmssParserAdapter.js';

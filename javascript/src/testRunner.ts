@@ -6,10 +6,10 @@
 
 import { readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
-import { loadQueriesFile, QueryBlock } from './queriesParserAdapter.js';
+import { QueriesParserAdapter, type QueryBlock } from './queriesParserAdapter.js';
+import { PMSSParserAdapter } from './pmssParserAdapter.js';
 import { BlockTestResult, TestResult } from './types.js';
 import { Selector, SelectorMatchContext } from './selectors.js';
-import { loadPMSSFile } from './pmssParserAdapter.js';
 import { resolve } from './resolve.js';
 
 export class PMSSTestRunner {
@@ -56,7 +56,7 @@ export class PMSSTestRunner {
 
       try {
         console.log(`  Parsing queries file...`);
-        blocks = await loadQueriesFile(queriesFile);
+        blocks = QueriesParserAdapter.parse(readFileSync(queriesFile, 'utf-8'));
         console.log(`  ✓ Loaded ${blocks.length} test blocks`);
       } catch (e) {
         console.log(`ERROR: Failed to parse ${queriesFile}: ${e}`);
@@ -65,7 +65,7 @@ export class PMSSTestRunner {
 
       try {
         console.log(`  Parsing PMSS file...`);
-        rules = await loadPMSSFile(pmssFile);
+        rules = PMSSParserAdapter.parse(readFileSync(pmssFile, 'utf-8'));
         console.log(`  ✓ Loaded configuration rules`);
       } catch (e) {
         console.log(`ERROR: Failed to parse ${pmssFile}: ${e}`);
